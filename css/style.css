@@ -1,0 +1,52 @@
+li.task-item:hover {
+    background-color: #eee;
+    transition: 0.7s;
+    cursor: pointer;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+h5.task {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+button.btn.btn-link.complete-button,
+button.btn.btn-link.delete-button {
+    color: #333;
+}
+
+.top-navbar {
+    margin-top: 20px;
+}
+
+#project-nav {
+    padding-top: 0;
+}
+
+#project-nav li a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#project-nav li:last-child {
+    margin-bottom: 0;
+}
+
+.top-navbar .navbar-btn {
+    margin-right: 8px;
+}
+
+.complete-button:hover {
+    color: #5cb85c;
+    transition: 0.2s;
+}
+
+.delete-button:hover {
+    color: #c9302c;
+    transition: 0.2s;
+}
