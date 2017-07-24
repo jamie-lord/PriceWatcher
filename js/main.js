@@ -113,11 +113,15 @@ $(document).ready(function() {
     }
 
     function setupProductChart(product) {
+        product.PriceHistory.sort(function(a, b) {
+            return new Date(a.Checked) - new Date(b.Checked);
+        });
+
         var dates = [];
         var prices = [];
         product.PriceHistory.forEach(function(element) {
-            dates.push(element.Checked);
-            prices.push(element.Price);
+            dates.push(new Date(element.Checked).toDateString());
+            prices.push(accounting.toFixed(element.Price, 2));
         }, this);
 
         var tescoDataset = {
@@ -140,10 +144,37 @@ $(document).ready(function() {
                 datasets: [tescoDataset]
             },
             options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItems, data) {
+                            return accounting.formatMoney(tooltipItems.yLabel, "£");
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: false,
+                            userCallback: function(value, index, values) {
+                                return accounting.formatMoney(value, "£");
+                            }
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Price'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date price checked'
                         }
                     }]
                 }
