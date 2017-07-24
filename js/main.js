@@ -124,12 +124,13 @@ $(document).ready(function() {
             label: 'Tesco',
             data: prices,
             backgroundColor: [
-                'rgba(0, 0, 255, 0.2)'
+                'rgba(010,85,160,0.2)'
             ],
             borderColor: [
-                'rgba(0,0,255,1)'
+                'rgba(10,85,160,1)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            steppedLine: true
         };
 
         var productChart = new Chart(chartContext, {
