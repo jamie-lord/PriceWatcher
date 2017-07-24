@@ -93,6 +93,10 @@ $(document).ready(function() {
 
         var detailsTemplate = getHtmlTemplate('template-product-details');
 
+        if (product.EAN != null) {
+            $('#product-detail-col').append('<p>EAN: ' + product.EAN + '</p>');
+        }
+
         var details = detailsTemplate.replace(/{{product-tesco-id}}/g, product.TescoProductId)
             .replace(/{{product-tesco-client-id}}/g, product.TescoClientId)
             .replace(/{{product-tesco-base-id}}/g, product.TescoBaseProductId);
