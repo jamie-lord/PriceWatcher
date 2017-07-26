@@ -42,16 +42,13 @@ function pagerInit() {
             pager.currentPage++;
         }
     };
-    init = function() {
-        for (var i = 0; i < pager.items.length; i++) {
-            if (i % pager.itemsPerPage === 0) {
-                pager.pagedItems[Math.floor(i / pager.itemsPerPage)] = [pager.items[i]];
-            } else {
-                pager.pagedItems[Math.floor(i / pager.itemsPerPage)].push(pager.items[i]);
-            }
+    for (var i = 0; i < pager.items.length; i++) {
+        if (i % pager.itemsPerPage === 0) {
+            pager.pagedItems[Math.floor(i / pager.itemsPerPage)] = [pager.items[i]];
+        } else {
+            pager.pagedItems[Math.floor(i / pager.itemsPerPage)].push(pager.items[i]);
         }
-    };
-    init();
+    }
 }
 
 $(function() {
