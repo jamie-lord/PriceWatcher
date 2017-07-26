@@ -21,7 +21,7 @@ function bindList() {
     var pgItems = pager.pagedItems[pager.currentPage];
     $("#searchResults").empty();
     for (var i = 0; i < pgItems.length; i++) {
-        var item = $('<a href="/product.html?id=' + pgItems[i].id + '" class="list-group-item">' + pgItems[i].title + '</a>');
+        var item = $('<a href="product.html?id=' + pgItems[i].id + '" class="list-group-item">' + pgItems[i].title + '</a>');
         $("#searchResults").append(item);
     }
 }
