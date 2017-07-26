@@ -60,7 +60,7 @@ $(function() {
     if (matches && matches[1]) {
         var value = decodeURIComponent(matches[1].replace(/\+/g, '%20'));
 
-        $.getJSON('/search.json').then(function(posts) {
+        $.getJSON('search.json').then(function(posts) {
 
             var options = {
                 shouldSort: true,
