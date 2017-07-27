@@ -26,11 +26,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-offset-2 col-sm-8">
+            <div class="col-sm-offset-2 col-sm-8" style="margin-bottom: 20px">
                 <form method="GET" action="index.html">
-                    <input type="text" name="q" placeholder="Search products...">
-                    <button type="submit">Search</button>
+                    <div class="input-group">
+                        <input type="text" name="q" id="searchInput" class="form-control" placeholder="Search products...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
                 <div class="list-group" id="searchResults"></div>
                 <ul class="pager">
                     <li class="previous"><a href="javascript:void(0)" onclick="prevPage(); return false;">«</a></li>

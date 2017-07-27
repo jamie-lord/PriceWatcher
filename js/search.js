@@ -57,6 +57,9 @@ $(function() {
     if (matches && matches[1]) {
         var value = decodeURIComponent(matches[1].replace(/\+/g, '%20'));
 
+        var input = document.getElementById('searchInput');
+        input.value = value;
+
         $.getJSON('search.json').then(function(posts) {
 
             var options = {
