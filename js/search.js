@@ -20,6 +20,9 @@ function updateResults(results) {
 function bindList() {
     var pgItems = pager.pagedItems[pager.currentPage];
     $("#searchResults").empty();
+    if (pgItems == undefined) {
+        return;
+    }
     for (var i = 0; i < pgItems.length; i++) {
         var item = $('<a href="product.html?id=' + pgItems[i].id + '" class="list-group-item">' + pgItems[i].title + '</a>');
         $("#searchResults").append(item);
@@ -51,35 +54,48 @@ function pagerInit() {
     }
 }
 
-$(function() {
-    var queryStringRegex = /[\?&]q=([^&]+)/g;
-    var matches = queryStringRegex.exec(window.location.search);
-    if (matches && matches[1]) {
-        var value = decodeURIComponent(matches[1].replace(/\+/g, '%20'));
+var fuse;
 
-        var input = document.getElementById('searchInput');
-        input.value = value;
-
-        $.getJSON('search.json').then(function(posts) {
-
-            var options = {
-                shouldSort: true,
-                threshold: 0.6,
-                location: 0,
-                distance: 100,
-                maxPatternLength: 32,
-                minMatchCharLength: 1,
-                keys: [
-                    "id",
-                    "title"
-                ]
-            };
-
-            var fuse = new Fuse(posts, options);
-
-            var results = fuse.search(value);
-
-            updateResults(results);
-        });
+function search(query) {
+    if (fuse == null) {
+        return;
     }
+    if (query == "") {
+        updateResults([]);
+        return;
+    }
+    var results = fuse.search(query);
+    updateResults(results);
+}
+
+$("#searchInput").on('change keydown paste input', $.debounce(250, function() {
+    search($('#searchInput').val());
+}));
+
+$(function() {
+    $.getJSON('search.json').then(function(products) {
+        var options = {
+            shouldSort: true,
+            threshold: 0.6,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+                "id",
+                "title"
+            ]
+        };
+
+        fuse = new Fuse(products, options);
+
+        var queryStringRegex = /[\?&]q=([^&]+)/g;
+        var matches = queryStringRegex.exec(window.location.search);
+        if (matches && matches[1]) {
+            var query = decodeURIComponent(matches[1].replace(/\+/g, '%20'));
+            $('#searchInput').val()
+            searchInput.value = query;
+            search(query);
+        }
+    });
 });
